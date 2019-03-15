@@ -16,7 +16,7 @@ import com.demo.provider1.async.AsyncService;
  *
  * @author tan liansheng on 2019/3/14 21:06
  */
-@Component
+//@Component
 public class MyCommandLine implements CommandLineRunner {
 
     @Autowired

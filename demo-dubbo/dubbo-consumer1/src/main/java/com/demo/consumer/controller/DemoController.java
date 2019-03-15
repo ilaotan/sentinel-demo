@@ -68,9 +68,7 @@ public class DemoController {
     @GetMapping("test2")
     public String test2(String msg)  {
 
-        for(int i = 0;i<5;i++) {
-            mockTest(msg + "_" + i);
-        }
+            mockTest(msg);
 
         return msg;
     }
@@ -79,7 +77,10 @@ public class DemoController {
 
         String user = String.valueOf(RpcContext.getContext().get("USER"));
 
-        threadPoolTaskExecutor.submit(new DealExportExcelThread(user, msg));
+        for(int i = 0;i<5;i++) {
+            threadPoolTaskExecutor.submit(new DealExportExcelThread(user, msg +"_" + i));
+        }
+
 
     }
 
