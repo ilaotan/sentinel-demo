@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  */
 
 @SpringBootApplication(scanBasePackages = {"com.demo"})
-@EnableAsync
 public class ProviderApplication {
 
 
