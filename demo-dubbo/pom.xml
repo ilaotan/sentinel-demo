@@ -16,6 +16,7 @@
         <module>dubbo-consumer1</module>
         <module>common-provider1-interfaces</module>
         <module>zookeeperMock</module>
+        <module>dubbo-filter</module>
     </modules>
 
 

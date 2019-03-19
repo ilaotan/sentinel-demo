@@ -17,7 +17,7 @@ import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
 public class DubboConfiguration {
 
 
-    @Bean
+//    @Bean
     public SentinelResourceAspect sentinelResourceAspect() {
         return new SentinelResourceAspect();
     }

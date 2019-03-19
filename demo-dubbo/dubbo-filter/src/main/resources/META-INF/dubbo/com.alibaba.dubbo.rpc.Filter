@@ -1,0 +1,2 @@
+dataProviderFilter=com.demo.dubbo.filter.DataProviderFilter
+dataConsumerFilter=com.demo.dubbo.filter.DataConsumerFilter

@@ -16,6 +16,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.demo.consumer.sonliasync.DealExportExcelThread;
 import com.demo.consumer.thread.SpringContextHolder;
+import com.demo.dubbo.filter.CommonConstants;
 import com.demo.provider.interfaces.IDemoService;
 import com.demo.provider.interfaces.UserVO;
 
@@ -34,60 +35,36 @@ public class DemoController {
     private IDemoService iDemoService;
 
     @Autowired
-    private ConsumerAsync consumerAsync;
-
-    @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
 
     @GetMapping("say")
 //    @SentinelResource(value = "test", blockHandler = "handleException", blockHandlerClass = {ExceptionUtil.class})
     @SentinelResource(value = "test", blockHandler = "exceptionHandler")
-    public UserVO sayHi(String msg){
+    public UserVO sayHi(String msg) {
 
-        System.out.println(Thread.currentThread().getName() + " controller-> " + RpcContext.getContext().get("USER"));
-        System.out.println(Thread.currentThread().getName() + " controller-> " + RpcContext.getContext().getAttachment("USER"));
+        System.out.println(Thread.currentThread().getName() + " controller-> " + RpcContext.getContext().get(CommonConstants.USERID));
+        System.out.println(Thread.currentThread().getName() + " controller-> " + RpcContext.getContext().getAttachment(CommonConstants.USERID));
 //        RpcContext.getContext().setAttachment("USER", "我是controller设置的值");
 
         return iDemoService.sayHi(msg);
     }
 
 
-    @GetMapping("test")
-    public String test(String msg) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-
-        System.out.println(Thread.currentThread().getName());
-
-
-        consumerAsync.testAsync(msg);
-
-        return msg;
-    }
-
-
     @GetMapping("test2")
-    public String test2(String msg)  {
-
-            mockTest(msg);
-
+    public String test2(String msg) {
+        mockTest(msg);
         return msg;
     }
 
-    private void mockTest(String msg){
+    private void mockTest(String msg) {
 
-        String user = String.valueOf(RpcContext.getContext().get("USER"));
+        String user = String.valueOf(RpcContext.getContext().get(CommonConstants.USERID));
 
-        for(int i = 0;i<5;i++) {
-            threadPoolTaskExecutor.submit(new DealExportExcelThread(user, msg +"_" + i));
+        for (int i = 0; i < 5; i++) {
+            threadPoolTaskExecutor.submit(new DealExportExcelThread(user, msg + "_" + i));
         }
-
-
     }
-
-
-
-
-
 
 
     public String exceptionHandler(long s, BlockException ex) {

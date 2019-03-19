@@ -18,6 +18,12 @@
             <artifactId>common-provider1-interfaces</artifactId>
             <version>${parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>witparking</groupId>
+            <artifactId>dubbo-filter</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+
 
     </dependencies>
 </project>
